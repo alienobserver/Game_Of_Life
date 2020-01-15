@@ -464,7 +464,7 @@ class Animal {
     }
     mul() {
         var newCell = random(this.chooseCell(0));
-        if (this.energy >= 12 && newCell) {
+        if (this.energy >= 20 && newCell) {
             var newAnimal = new Animal(newCell[0], newCell[1], this.index);
             animalArr.push(newAnimal);
             matrix[newCell[1]][newCell[0]] = this.index;

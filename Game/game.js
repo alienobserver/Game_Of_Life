@@ -25,7 +25,7 @@ function setup() {
     function pull_array(n){
         let a = []
         while(n > 0){
-            a.push(random([0,1,1,1,1,1,1,1,1,1,1,2,3,4,5]));
+            a.push(random([0,5,1,1,1,3,1,1,1,1,1,1,2,1,4,1]));
             n--;
         }
         return a;

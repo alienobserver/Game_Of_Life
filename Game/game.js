@@ -17,26 +17,23 @@ function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
 
-function pull_array(n){
-    let a = []
-    while(n > 0){
-        a.push(getRndInteger(0,6));
-        n--;
-    }
-    return a;
-}
-
-
 let n = parseInt(prompt("Input number of area"));
 let m = n;
 let matrix = [];
-while(m > 0){
-    matrix.push(pull_array(n));
-    m--;
-}
-
 
 function setup() {
+    function pull_array(n){
+        let a = []
+        while(n > 0){
+            a.push(random([0,1,1,1,1,1,1,1,1,1,1,2,3,4,5]));
+            n--;
+        }
+        return a;
+    }
+    while(m > 0){
+        matrix.push(pull_array(n));
+        m--;
+    }
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
     for(var y = 0; y < matrix.length; ++y){

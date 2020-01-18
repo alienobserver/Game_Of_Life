@@ -1,39 +1,43 @@
 
 //                    Game
-
- 
-var side = 20;
-
-
- 
-  let grassArr = [];
-  let grassEaterArr = [];
-  let predatorArr = [];
-  let predatorEaterArr = [];
-  let animalArr = [];
-
+let side = 20;
+let grassArr = [];
+let grassEaterArr = [];
+let predatorArr = [];
+let predatorEaterArr = [];
+let animalArr = [];
+let n = parseInt(prompt("Input number of area"));
+let m = n;
+let s = n;
+let matrix = [];
+let rand1 = 0;
+let rand2 = 0;
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
   }
 
-let n = parseInt(prompt("Input number of area"));
-let m = n;
-let matrix = [];
+function pull_array(n){
+    let a = []
+    while(n > 0){
+        a.push( getRndInteger( 0, 6 ) );
+        n--;
+    }
+    return a;
+}
+
+while(m > 0){
+    matrix.push(pull_array(n));
+    m--;
+}
+
+for (let i = 0; i <  s*s*60/100 ; i++) {
+    rand1 = getRndInteger(0,s);
+    rand2 = getRndInteger(0,s);
+    matrix[rand1][rand2] = 1;
+}
 
 function setup() {
-    function pull_array(n){
-        let a = []
-        while(n > 0){
-            a.push(random([5,1,3,1,3,1,1,4,1,1,2,1,2,1]));
-            n--;
-        }
-        return a;
-    }
-    while(m > 0){
-        matrix.push(pull_array(n));
-        m--;
-    }
     createCanvas(matrix[0].length * side, matrix.length * side);
     background('#acacac');
     for(var y = 0; y < matrix.length; ++y){

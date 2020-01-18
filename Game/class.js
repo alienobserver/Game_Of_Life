@@ -329,7 +329,7 @@ class PredatorEater {
         var newCell = random(this.chooseCell(0));
         let rand = getRndInteger(1,10);
         if (rand > 5){
-            if (this.energy >= 12 && newCell) {
+            if (this.energy >= 20 && newCell) {
                 var newAnimal = new Animal(newCell[0], newCell[1], 5);
                 animalArr.push(newAnimal);
                 matrix[newCell[1]][newCell[0]] = this.index;

@@ -20,6 +20,15 @@ class GrassEater extends LivingCreature{
             this.energy += 2;
         }
     }
+    mul() {
+        var newCell = random(this.chooseCell(0));
+        if (this.energy >= 12 && newCell) {
+            var newGrassEater = new GrassEater(newCell[0], newCell[1], this.index);
+            grassEaterArr.push(newGrassEater);
+            matrix[newCell[1]][newCell[0]] = this.index;
+            this.energy = 8;
+        }
+    }
 
     die() {
         if (this.energy <= 0) {
@@ -30,15 +39,6 @@ class GrassEater extends LivingCreature{
                     break;
                 }
             }
-        }
-    }
-    mul() {
-        var newCell = random(this.chooseCell(0));
-        if (this.energy >= 12 && newCell) {
-            var newGrassEater = new GrassEater(newCell[0], newCell[1], this.index);
-            grassEaterArr.push(newGrassEater);
-            matrix[newCell[1]][newCell[0]] = this.index;
-            this.energy = 8;
         }
     }
 }

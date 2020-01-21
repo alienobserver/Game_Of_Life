@@ -1,6 +1,6 @@
 class Predator extends LivingCreature{
     eat() {
-        var grassEater = random(this.chooseCell(4));
+        var grassEater = random(this.chooseCell(2));
         if (grassEater) {
             var newX = grassEater[0];
             var newY = grassEater[1];

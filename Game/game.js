@@ -1,5 +1,3 @@
-
-//                    Game
 let side = 15;
 let grassArr = [];
 let grassEaterArr = [];
@@ -11,6 +9,72 @@ let s = n;
 let matrix = [];
 let rand1 = 0;
 let rand2 = 0;
+
+function add_grasseater(percent){
+    if(grassEaterArr.length < s*s*percent/100){
+        for (let i = 0; i <  s*s*percent/100 ; i++) {
+            rand1 = getRndInteger(0,s);
+            rand2 = getRndInteger(0,s);
+            matrix[rand1][rand2] = 2;
+            person = new GrassEater(rand2, rand1, 2);
+            grassEaterArr.push(person);
+        }    
+    }
+    else if(grassEaterArr.length > s*s*20/100){
+        for(let m in grassEaterArr){
+            matrix[grassEaterArr[m].y][grassEaterArr[m].x] = 0;
+            grassEaterArr.splice(m,1);
+        }
+    }
+}
+
+function add_predator(percent){
+    if(predatorArr.length < s*s*percent/100){
+        for (let i = 0; i <  s*s*percent/100 ; i++) {
+            rand1 = getRndInteger(0,s);
+            rand2 = getRndInteger(0,s);
+            matrix[rand1][rand2] = 3;
+            person = new Predator(rand2, rand1, 3);
+            predatorArr.push(person);
+        }    
+    }
+    else if(predatorArr.length > s*s*20/100){
+        for(let m in predatorArr){
+            matrix[predatorArr[m].y][predatorArr[m].x] = 0;
+            predatorArr.splice(m,1);
+        }
+    }
+}
+
+function add_predatoreater(percent){
+    if(predatorEaterArr.length < s*s*percent/100){
+        for (let i = 0; i <  s*s*percent/100 ; i++) {
+            rand1 = getRndInteger(0,s);
+            rand2 = getRndInteger(0,s);
+            matrix[rand1][rand2] = 4;
+            person = new PredatorEater(rand2, rand1, 4);
+            predatorEaterArr.push(person);
+        }    
+    }
+    else if(predatorEaterArr.length > s*s*10/100){
+        for(let m in predatorEaterArr){
+            matrix[predatorEaterArr[m].y][predatorEaterArr[m].x] = 0;
+            predatorEaterArr.splice(m,1);
+        }
+    }
+}
+
+function add_grass(percent){
+    if(grassArr.length < s*s*percent/100){
+        for (let i = 0; i <  s*s*percent/100 ; i++) {
+            rand1 = getRndInteger(0,s);
+            rand2 = getRndInteger(0,s);
+            matrix[rand1][rand2] = 2;
+            person = new Grass(rand2, rand1, 1);
+            grassArr.push(person);
+        }    
+    }
+}
 
 function getRndInteger(min, max) {
     return Math.floor(Math.random() * (max - min) ) + min;
@@ -30,7 +94,7 @@ while(m > 0){
     m--;
 }
 
-for (let i = 0; i <  s*s*60/100 ; i++) {
+for (let i = 0; i <  s*s*70/100 ; i++) {
     rand1 = getRndInteger(0,s);
     rand2 = getRndInteger(0,s);
     matrix[rand1][rand2] = 1;
@@ -42,7 +106,7 @@ function setup() {
     for(var y = 0; y < matrix.length; ++y){
         for(var x = 0; x < matrix[y].length; ++x){
             if(matrix[y][x] == 1){
-                var gr = new Grass(x,y,1,grassArr);
+                var gr = new Grass(x,y,1);
                 grassArr.push(gr);
             }
             else if(matrix[y][x] == 2){
@@ -110,5 +174,9 @@ function draw() {
         predatorEaterArr[m].die();
         
     }
- }
+    add_grass(10);
+    add_predator(5);
+    add_grasseater(5);
+    add_predatoreater(1);
+}
  

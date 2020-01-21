@@ -2,9 +2,8 @@ class LivingCreature {
     constructor(x, y, index) {
         this.x = x;
         this.y = y;
+        this.energy = 8;
         this.index = index;
-        this.multiply = 0;
-        // this.arr = arr;
         this.directions = [
             [this.x - 1, this.y - 1],
             [this.x, this.y - 1],
@@ -15,9 +14,7 @@ class LivingCreature {
             [this.x, this.y + 1],
             [this.x + 1, this.y + 1]
         ];
-
     }
-
     getNewCoordinates() {
         this.directions = [
             [this.x - 1, this.y - 1],

@@ -47,7 +47,7 @@ class PredatorEater extends LivingCreature{
     }
     mul() {
         var newCell = random(this.chooseCell(0));
-        if (this.energy >= 12 && newCell) {
+        if (this.energy >= 25 && newCell) {
             var newPredatorEater = new PredatorEater(newCell[0], newCell[1], this.index);
             predatorEaterArr.push(newPredatorEater);
             matrix[newCell[1]][newCell[0]] = this.index;

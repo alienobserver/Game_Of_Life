@@ -243,8 +243,6 @@ class Predator {
             }
         }
     }
-
-
 }
 
 class PredatorEater {

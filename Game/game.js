@@ -1,11 +1,10 @@
 
 //                    Game
-let side = 20;
+let side = 15;
 let grassArr = [];
 let grassEaterArr = [];
 let predatorArr = [];
 let predatorEaterArr = [];
-let animalArr = [];
 let n = parseInt(prompt("Input number of area"));
 let m = n;
 let s = n;
@@ -20,7 +19,7 @@ function getRndInteger(min, max) {
 function pull_array(n){
     let a = []
     while(n > 0){
-        a.push( getRndInteger( 0, 6 ) );
+        a.push( getRndInteger( 0, 5 ) );
         n--;
     }
     return a;
@@ -43,7 +42,7 @@ function setup() {
     for(var y = 0; y < matrix.length; ++y){
         for(var x = 0; x < matrix[y].length; ++x){
             if(matrix[y][x] == 1){
-                var gr = new Grass(x,y,1);
+                var gr = new Grass(x,y,1,grassArr);
                 grassArr.push(gr);
             }
             else if(matrix[y][x] == 2){
@@ -57,10 +56,6 @@ function setup() {
             else if(matrix[y][x] == 4){
                 var predatorEater = new PredatorEater(x,y,4);
                 predatorEaterArr.push(predatorEater);
-            }
-            else if(matrix[y][x] == 5){
-                var animal = new Animal(x,y,5);
-                animalArr.push(animal);
             }
         }
      }     
@@ -88,15 +83,7 @@ function draw() {
             else if (matrix[y][x] == 4) {
                 fill("blue");
             }
-            else if (matrix[y][x] == 5) {
-                fill("black");
-            }
             rect(x * side, y * side, side, side);
-              
-     /*
-     fill("blue")
-     text(x+" "+y, x*side+side/2,y*side+side/2)
-     */	
         }
     }
     for(let i in grassArr){
@@ -121,13 +108,6 @@ function draw() {
         predatorEaterArr[m].eat();
         predatorEaterArr[m].mul();
         predatorEaterArr[m].die();
-        
-    }
-    for(let n in animalArr){
-        animalArr[n].move();
-        animalArr[n].eat();
-        animalArr[n].mul();
-        animalArr[n].die();
         
     }
  }

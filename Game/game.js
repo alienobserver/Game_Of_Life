@@ -1,14 +1,25 @@
+const Grass = require("./grass.js");
+const GrassEater = require("./grassEater.js");
+const Predator = require("./predator.js");
+const PredatorEater = require("./predatorEater.js");
+const { createCanvas, loadImage } = require('canvas');
+var fs = require('fs');
+
 let side = 15;
 let grassArr = [];
 let grassEaterArr = [];
 let predatorArr = [];
 let predatorEaterArr = [];
-let n = parseInt(prompt("Input number of area"));
+let n = 50;
 let m = n;
 let s = n;
 let matrix = [];
 let rand1 = 0;
 let rand2 = 0;
+var ctx;
+var canvas;
+
+
 
 function add_grasseater(percent){
     if(grassEaterArr.length < s*s*percent/100){
@@ -16,7 +27,7 @@ function add_grasseater(percent){
             rand1 = getRndInteger(0,s);
             rand2 = getRndInteger(0,s);
             matrix[rand1][rand2] = 2;
-            person = new GrassEater(rand2, rand1, 2);
+            person = new GrassEater.GrassEater(rand2, rand1, 2);
             grassEaterArr.push(person);
         }    
     }
@@ -34,7 +45,7 @@ function add_predator(percent){
             rand1 = getRndInteger(0,s);
             rand2 = getRndInteger(0,s);
             matrix[rand1][rand2] = 3;
-            person = new Predator(rand2, rand1, 3);
+            person = new Predator.Predator(rand2, rand1, 3);
             predatorArr.push(person);
         }    
     }
@@ -52,7 +63,7 @@ function add_predatoreater(percent){
             rand1 = getRndInteger(0,s);
             rand2 = getRndInteger(0,s);
             matrix[rand1][rand2] = 4;
-            person = new PredatorEater(rand2, rand1, 4);
+            person = new PredatorEater.PredatorEater(rand2, rand1, 4);
             predatorEaterArr.push(person);
         }    
     }
@@ -70,7 +81,7 @@ function add_grass(percent){
             rand1 = getRndInteger(0,s);
             rand2 = getRndInteger(0,s);
             matrix[rand1][rand2] = 2;
-            person = new Grass(rand2, rand1, 1);
+            person = new Grass.Grass(rand2, rand1, 1);
             grassArr.push(person);
         }    
     }
@@ -89,36 +100,37 @@ function pull_array(n){
     return a;
 }
 
-while(m > 0){
-    matrix.push(pull_array(n));
-    m--;
-}
-
-for (let i = 0; i <  s*s*70/100 ; i++) {
-    rand1 = getRndInteger(0,s);
-    rand2 = getRndInteger(0,s);
-    matrix[rand1][rand2] = 1;
-}
-
 function setup() {
-    createCanvas(matrix[0].length * side, matrix.length * side);
-    background('#acacac');
+    while(m > 0){
+        matrix.push(pull_array(n));
+        m--;
+    }
+    
+    for (let i = 0; i <  s*s*70/100 ; i++) {
+        rand1 = getRndInteger(0,s);
+        rand2 = getRndInteger(0,s);
+        matrix[rand1][rand2] = 1;
+    }
+
+    canvas = createCanvas(matrix[0].length * side, matrix.length * side)
+    ctx = canvas.getContext('2d')
+
     for(var y = 0; y < matrix.length; ++y){
         for(var x = 0; x < matrix[y].length; ++x){
             if(matrix[y][x] == 1){
-                var gr = new Grass(x,y,1);
+                var gr = new Grass.Grass(x,y,1);
                 grassArr.push(gr);
             }
             else if(matrix[y][x] == 2){
-                var grassEater = new GrassEater(x,y,2);
+                var grassEater = new GrassEater.GrassEater(x,y,2);
                 grassEaterArr.push(grassEater);
             }
             else if(matrix[y][x] == 3){
-                var predator = new Predator(x,y,3);
+                var predator = new Predator.Predator(x,y,3);
                 predatorArr.push(predator);
             }
             else if(matrix[y][x] == 4){
-                var predatorEater = new PredatorEater(x,y,4);
+                var predatorEater = new PredatorEater.PredatorEater(x,y,4);
                 predatorEaterArr.push(predatorEater);
             }
         }
@@ -126,28 +138,25 @@ function setup() {
     
 }
 
-
 function draw() {
-    frameRate(5);
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
-
             if (matrix[y][x] == 1) {
-                fill("green");
+                ctx.fillStyle = "green";
             }
             else if (matrix[y][x] == 0) {
-                fill("#acacac");
+                ctx.fillStyle = "#acacac";
             }
             else if (matrix[y][x] == 2) {
-                fill("yellow");
+                ctx.fillStyle = "yellow";
             }
             else if (matrix[y][x] == 3) {
-                fill("red");
+                ctx.fillStyle = "red";
             }
             else if (matrix[y][x] == 4) {
-                fill("blue");
+                ctx.fillStyle = "blue";
             }
-            rect(x * side, y * side, side, side);
+            ctx.fillRect(x * side, y * side, side, side);
         }
     }
     for(let i in grassArr){
@@ -178,5 +187,28 @@ function draw() {
     add_predator(5);
     add_grasseater(5);
     add_predatoreater(1);
+
+    // out = fs.createWriteStream(__dirname + '/state.png');
+    // stream = canvas.pngStream();
+
+    // stream.on('data', function(chunk){
+    //     out.write(chunk);
+    // });
+
 }
- 
+
+module.exports.add_grass = add_grass;
+module.exports.add_grasseater = add_grasseater;
+module.exports.add_predator = add_predator;
+module.exports.add_predatoreater = add_predatoreater;
+module.exports.setup = setup;
+module.exports.draw = draw;
+module.exports.getRndInteger = getRndInteger;
+module.exports.pull_array = pull_array;
+module.exports.grassArr = grassArr;
+module.exports.grassEaterArr = grassEaterArr;
+module.exports.predatorArr = predatorArr;
+module.exports.predatorEaterArr = predatorEaterArr;
+module.exports.matrix = matrix;
+module.exports.canvas = canvas;
+module.exports.ctx = ctx;

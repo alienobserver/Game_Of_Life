@@ -3,17 +3,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.14/p5.js"></script>
-    <script src="LivingCreature.js"></script>
-    <script src="grass.js"></script>
-    <script src="grassEater.js"></script>
-    <script src="predator.js"></script>
-    <script src="predatorEater.js"></script>
-    <script src="game.js"></script>
+    <canvas id="myCanvas" width="500" height="500"></canvas>
     <title>Document</title>
 </head>
 <body>
-
-    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        var socket = io();
+        socket.emit('send canvas' , "Canvas");
+        socket.on('get canvas' , function (new_canvas) {
+            var canvas = document.getElementById("myCanvas");
+            var ctx = canvas.getContext("2d");
+            ctx = new_canvas;
+        });    
+    </script>
 </body>
 </html>

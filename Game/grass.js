@@ -31,9 +31,13 @@ class Grass {
         return found;
     }
 
+    random(list) {
+        return list[Math.floor((Math.random()*list.length))];
+    } 
+
     mul() {
         this.multiply++;
-        var newCell = random(this.chooseCell(0));
+        var newCell = this.random(this.chooseCell(0));
         if (this.multiply >= 4 && newCell) {
             var newGrass = new Grass(newCell[0], newCell[1], this.index);
             grassArr.push(newGrass);
@@ -43,3 +47,5 @@ class Grass {
     }
 
 }
+
+module.exports.Grass = Grass;

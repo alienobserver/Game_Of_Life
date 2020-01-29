@@ -46,7 +46,7 @@ class LivingCreature {
     move() {
         
         var emptyCells = this.chooseCell(0);
-        var newCell = random(emptyCells);
+        var newCell = this.random(emptyCells);
 
         if (newCell) {
             var newX = newCell[0];
@@ -60,6 +60,10 @@ class LivingCreature {
             this.energy--;
         }
     }
+
+    random (list) {
+        return list[Math.floor((Math.random()*list.length))];
+    } 
 
     // eat(enemy_index, enemyArr) {
     //     var creature = random(this.chooseCell(enemy_index));
@@ -95,3 +99,5 @@ class LivingCreature {
     //     }
     // }
 }
+
+module.exports.LivingCreature = LivingCreature;

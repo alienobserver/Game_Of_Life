@@ -3,19 +3,115 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <canvas id="myCanvas" width="500" height="500"></canvas>
+    <canvas id="myCanvas" width="750" height="750" style="display: inline-block;"></canvas>
     <title>Document</title>
+    <style>
+        .button {
+            display: inline-block;
+            position: relative;
+            bottom: 750px;
+            left: 755px;
+            border: 1px solid black;
+            background-color: white;
+            min-width: 160px;
+        }
+        .button:focus{
+            background-color: black;
+            color: white;
+        }
+        #myCanvas{
+            border: 1px solid black;
+        }
+        div{
+           display: inline-block;
+           position: relative;
+           bottom: 744px;
+           left: 755px;
+           height: 18px;
+           width: 18px;
+           border: 1px solid black; 
+        }
+    </style>
 </head>
 <body>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
-        socket.emit('send canvas' , "Canvas");
-        socket.on('get canvas' , function (new_canvas) {
+        var side = 15;
+        var grassCol = "green";
+        var grassEaterCol = "yellow";
+        var predatorCol = "red";
+        var predatorEaterCol = "blue";
+        var personsGenCol = "pink";
+        var bombCol = "black"
+
+        function mode1( x ) {
+            socket.emit('mode 1');
+        }
+
+        function mode2( x ) {
+            socket.emit('mode 2');
+        }
+
+        function mode3( x ) {
+            socket.emit('mode 3');
+        }
+
+        function mode4( x ) {
+            socket.emit('mode 4');
+        }
+
+        function mode5( x ) {
+            socket.emit('mode 5');
+        }
+
+        function mode6( x ) {
+            socket.emit('mode 6');
+        }
+
+        socket.on('get canvas' , function (matrix) {
             var canvas = document.getElementById("myCanvas");
             var ctx = canvas.getContext("2d");
-            ctx = new_canvas;
+            for (var y = 0; y < matrix.length; y++) {
+                for (var x = 0; x < matrix[y].length; x++) {
+                    if (matrix[y][x] == 1) {
+                        ctx.fillStyle = grassCol;
+                    }
+                    else if (matrix[y][x] == 0) {
+                        ctx.fillStyle = "#acacac";
+                    }
+                    else if (matrix[y][x] == 2) {
+                        ctx.fillStyle = grassEaterCol;
+                    }
+                    else if (matrix[y][x] == 3) {
+                        ctx.fillStyle = predatorCol;
+                    }
+                    else if (matrix[y][x] == 4) {
+                        ctx.fillStyle = predatorEaterCol;
+                    }
+                    else if (matrix[y][x] == 5) {
+                        ctx.fillStyle = personsGenCol;
+                    }
+                    else if (matrix[y][x] == 6) {
+                        ctx.fillStyle = bombCol;
+                    }
+                    ctx.fillRect(x * side, y * side, side, side);
+                }
+            }
         });    
     </script>
+    <br>
+    <button onclick="mode1(this)" class="button">Remove PredatorEaters</button>
+    <div style="background-color: blue;"></div> <br> <br>
+    <button onclick="mode2(this)" class="button">Add PredatorEaters</button>
+    <div style="background-color: blue;"></div> <br> <br>
+    <button onclick="mode3(this)" class="button">Remove Predators</button>
+    <div style="background-color: red;"></div> <br> <br>
+    <button onclick="mode4(this)" class="button">Add Predators</button>
+    <div style="background-color: red;"></div> <br> <br>
+    <button onclick="mode5(this)" class="button">Remove Bombs</button>
+    <div style="background-color: black;"></div> <br> <br>
+    <button onclick="mode6(this)" class="button">Add Bombs</button>
+    <div style="background-color: black;"></div> <br> <br>
 </body>
 </html>

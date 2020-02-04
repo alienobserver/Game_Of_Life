@@ -2,94 +2,109 @@ const Grass = require("./grass.js");
 const GrassEater = require("./grassEater.js");
 const Predator = require("./predator.js");
 const PredatorEater = require("./predatorEater.js");
-const { createCanvas, loadImage } = require('canvas');
-var fs = require('fs');
+const PersonGenerator = require("./personGenerator");
+const Bomb = require("./bomb");
 
 let side = 15;
 let grassArr = [];
 let grassEaterArr = [];
 let predatorArr = [];
 let predatorEaterArr = [];
+let bombArr = [];
+let perGen;
+let preCount = 5;
+let preEatCount = 2.5;
+let grCount = 10;
+let grEatCount = 5;
 let n = 50;
 let m = n;
 let s = n;
 let matrix = [];
 let rand1 = 0;
 let rand2 = 0;
-var ctx;
-var canvas;
 
-
-
-function add_grasseater(percent){
-    if(grassEaterArr.length < s*s*percent/100){
-        for (let i = 0; i <  s*s*percent/100 ; i++) {
-            rand1 = getRndInteger(0,s);
-            rand2 = getRndInteger(0,s);
-            matrix[rand1][rand2] = 2;
-            person = new GrassEater.GrassEater(rand2, rand1, 2);
-            grassEaterArr.push(person);
-        }    
-    }
-    else if(grassEaterArr.length > s*s*20/100){
-        for(let m in grassEaterArr){
-            matrix[grassEaterArr[m].y][grassEaterArr[m].x] = 0;
-            grassEaterArr.splice(m,1);
+function mode_1() {
+    preEatCount = 0;
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if ( matrix[y][x] == 4 ) {
+                matrix[y][x] = 0
+            }
         }
+    }
+    if (predatorEaterArr) {
+        predatorEaterArr = [];
     }
 }
 
-function add_predator(percent){
-    if(predatorArr.length < s*s*percent/100){
-        for (let i = 0; i <  s*s*percent/100 ; i++) {
-            rand1 = getRndInteger(0,s);
-            rand2 = getRndInteger(0,s);
-            matrix[rand1][rand2] = 3;
-            person = new Predator.Predator(rand2, rand1, 3);
-            predatorArr.push(person);
-        }    
-    }
-    else if(predatorArr.length > s*s*20/100){
-        for(let m in predatorArr){
-            matrix[predatorArr[m].y][predatorArr[m].x] = 0;
-            predatorArr.splice(m,1);
+function mode_2() {
+    preEatCount = 2.5;
+    if (predatorEaterArr.length < s * s * preEatCount / 100) {
+        for (let i = 0; i < s * s * preEatCount / 100; i++) {
+            rand1 = getRndInteger(0, s);
+            rand2 = getRndInteger(0, s);
+            if (matrix[rand1][rand2] == 0) {
+                matrix[rand1][rand2] = 4;
+                person = new PredatorEater.PredatorEater(rand2, rand1, 4);
+                predatorEaterArr.push(person);
+            }
         }
     }
 }
-
-function add_predatoreater(percent){
-    if(predatorEaterArr.length < s*s*percent/100){
-        for (let i = 0; i <  s*s*percent/100 ; i++) {
-            rand1 = getRndInteger(0,s);
-            rand2 = getRndInteger(0,s);
-            matrix[rand1][rand2] = 4;
-            person = new PredatorEater.PredatorEater(rand2, rand1, 4);
-            predatorEaterArr.push(person);
-        }    
+function mode_3() {
+    preCount = 0;
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if ( matrix[y][x] == 3 ) {
+                matrix[y][x] = 0
+            }
+        }
     }
-    else if(predatorEaterArr.length > s*s*10/100){
-        for(let m in predatorEaterArr){
-            matrix[predatorEaterArr[m].y][predatorEaterArr[m].x] = 0;
-            predatorEaterArr.splice(m,1);
+    if (predatorArr) {
+        predatorArr = [];
+    }
+}
+function mode_4() {
+    preCount = 5;
+    if (predatorArr.length < s * s * preCount / 100) {
+        for (let i = 0; i < s * s * preCount / 100; i++) {
+            rand1 = getRndInteger(0, s);
+            rand2 = getRndInteger(0, s);
+            if (matrix[rand1][rand2] == 0) {
+                matrix[rand1][rand2] = 3;
+                person = new Predator.Predator(rand2, rand1, 3);
+                predatorArr.push(person);
+            }
         }
     }
 }
-
-function add_grass(percent){
-    if(grassArr.length < s*s*percent/100){
-        for (let i = 0; i <  s*s*percent/100 ; i++) {
-            rand1 = getRndInteger(0,s);
-            rand2 = getRndInteger(0,s);
-            matrix[rand1][rand2] = 2;
-            person = new Grass.Grass(rand2, rand1, 1);
-            grassArr.push(person);
-        }    
+function mode_5() {
+    for (var y = 0; y < matrix.length; y++) {
+        for (var x = 0; x < matrix[y].length; x++) {
+            if ( matrix[y][x] == 6 ) {
+                matrix[y][x] = 0
+            }
+        }
+    }
+    if (bombArr) {
+        bombArr = [];
+    }
+}
+function mode_6() {
+    while ( bombArr.length < 6 ) {
+        rand1 = getRndInteger(0, s);
+        rand2 = getRndInteger(0, s);
+        if (matrix[rand1][rand2] == 0) {
+            matrix[rand1][rand2] = 6;
+            person = new Bomb.Bomb(rand1, rand2, 6);
+            bombArr.push(person);
+        }
     }
 }
 
 function getRndInteger(min, max) {
-    return Math.floor(Math.random() * (max - min) ) + min;
-  }
+    return Math.floor(Math.random() * (max - min)) + min;
+}
 
 function pull_array(n){
     let a = []
@@ -112,9 +127,6 @@ function setup() {
         matrix[rand1][rand2] = 1;
     }
 
-    canvas = createCanvas(matrix[0].length * side, matrix.length * side)
-    ctx = canvas.getContext('2d')
-
     for(var y = 0; y < matrix.length; ++y){
         for(var x = 0; x < matrix[y].length; ++x){
             if(matrix[y][x] == 1){
@@ -134,31 +146,20 @@ function setup() {
                 predatorEaterArr.push(predatorEater);
             }
         }
-     }     
-    
+    }
+
+    for (let i = 1; i <= 6; i++) {
+        rand1 = getRndInteger(0, s);
+        rand2 = this.getRndInteger(0, s);
+        var bomb = new Bomb.Bomb(rand2, rand1, 6);
+        bombArr.push(bomb);
+    }
+
+    matrix[0][0] = 5;
+    perGen = new PersonGenerator.PersonGenerator(0, 0, 5);
 }
 
 function draw() {
-    for (var y = 0; y < matrix.length; y++) {
-        for (var x = 0; x < matrix[y].length; x++) {
-            if (matrix[y][x] == 1) {
-                ctx.fillStyle = "green";
-            }
-            else if (matrix[y][x] == 0) {
-                ctx.fillStyle = "#acacac";
-            }
-            else if (matrix[y][x] == 2) {
-                ctx.fillStyle = "yellow";
-            }
-            else if (matrix[y][x] == 3) {
-                ctx.fillStyle = "red";
-            }
-            else if (matrix[y][x] == 4) {
-                ctx.fillStyle = "blue";
-            }
-            ctx.fillRect(x * side, y * side, side, side);
-        }
-    }
     for(let i in grassArr){
         grassArr[i].mul();
     }
@@ -183,24 +184,19 @@ function draw() {
         predatorEaterArr[m].die();
         
     }
-    add_grass(10);
-    add_predator(5);
-    add_grasseater(5);
-    add_predatoreater(1);
 
-    // out = fs.createWriteStream(__dirname + '/state.png');
-    // stream = canvas.pngStream();
+    for (let n in bombArr) {
+        bombArr[n].eat();
+    }
 
-    // stream.on('data', function(chunk){
-    //     out.write(chunk);
-    // });
+    perGen.add_grass(grCount);
+    perGen.add_predator(preCount);
+    perGen.add_grasseater(grEatCount);
+    perGen.add_predatoreater(preEatCount);
+    perGen.move();
 
 }
 
-module.exports.add_grass = add_grass;
-module.exports.add_grasseater = add_grasseater;
-module.exports.add_predator = add_predator;
-module.exports.add_predatoreater = add_predatoreater;
 module.exports.setup = setup;
 module.exports.draw = draw;
 module.exports.getRndInteger = getRndInteger;
@@ -209,6 +205,15 @@ module.exports.grassArr = grassArr;
 module.exports.grassEaterArr = grassEaterArr;
 module.exports.predatorArr = predatorArr;
 module.exports.predatorEaterArr = predatorEaterArr;
+module.exports.perGen = perGen;
 module.exports.matrix = matrix;
-module.exports.canvas = canvas;
-module.exports.ctx = ctx;
+module.exports.grCount = grCount;
+module.exports.grEatCount = grEatCount;
+module.exports.preCount = preCount;
+module.exports.preEatCount = preEatCount;
+module.exports.mode_1 = mode_1;
+module.exports.mode_2 = mode_2;
+module.exports.mode_3 = mode_3;
+module.exports.mode_4 = mode_4;
+module.exports.mode_5 = mode_5;
+module.exports.mode_6 = mode_6;

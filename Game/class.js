@@ -146,7 +146,6 @@ class GrassEater {
 
 }
 
-
 class Predator {
     constructor(x, y, index) {
         this.x = x;

@@ -1,35 +1,35 @@
 const LivingCreature = require("./LivingCreature");
 
-class PredatorEater extends LivingCreature.LivingCreature{
+class PredatorEater extends LivingCreature.LivingCreature {
     eat() {
         var predator = super.random(this.chooseCell(3));
         var grass = super.random(this.chooseCell(1));
 
-        if(predator){
+        if (predator) {
             var target = predator.concat(grass);
         }
-        else if(grass){
+        else if (grass) {
             var target = grass.concat(predator);
         }
         if (target) {
             var newX = target[0];
             var newY = target[1];
 
-            if(matrix[newY][newX] == 1) {
+            if (matrix[newY][newX] == 1) {
                 for (let i in grassArr) {
                     if (grassArr[i].x == newX && grassArr[i].y == newY) {
                         grassArr.splice(i, 1);
                         break;
                     }
-                }               
+                }
             }
-            else if(matrix[newY][newX] == 3){
+            else if (matrix[newY][newX] == 3) {
                 for (let i in predatorArr) {
                     if (predatorArr[i].x == newX && predatorArr[i].y == newY) {
                         predatorArr.splice(i, 1);
                         break;
                     }
-                } 
+                }
             }
 
             matrix[this.y][this.x] = 0;
@@ -71,3 +71,4 @@ class PredatorEater extends LivingCreature.LivingCreature{
 }
 
 module.exports.PredatorEater = PredatorEater;
+

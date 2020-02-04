@@ -1,6 +1,6 @@
 const LivingCreature = require("./LivingCreature");
 
-class Predator extends LivingCreature.LivingCreature{
+class Predator extends LivingCreature.LivingCreature {
     eat() {
         var grassEater = super.random(this.chooseCell(2));
         if (grassEater) {
@@ -46,3 +46,4 @@ class Predator extends LivingCreature.LivingCreature{
 }
 
 module.exports.Predator = Predator;
+

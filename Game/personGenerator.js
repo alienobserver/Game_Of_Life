@@ -18,7 +18,7 @@ class PersonGenerator extends LivingCreature.LivingCreature {
             for (let i = 0; i < this.s * this.s * percent / 100; i++) {
                 this.rand1 = this.getRndInteger(0, this.s);
                 this.rand2 = this.getRndInteger(0, this.s);
-                if( matrix[this.rand1][this.rand2] == 0 ){
+                if (matrix[this.rand1][this.rand2] == 0) {
                     matrix[this.rand1][this.rand2] = 2;
                     this.person = new GrassEater.GrassEater(this.rand2, this.rand1, 2);
                     grassEaterArr.push(this.person);
@@ -38,7 +38,7 @@ class PersonGenerator extends LivingCreature.LivingCreature {
             for (let i = 0; i < this.s * this.s * percent / 100; i++) {
                 this.rand1 = this.getRndInteger(0, this.s);
                 this.rand2 = this.getRndInteger(0, this.s);
-                if( matrix[this.rand1][this.rand2] == 0 ){
+                if (matrix[this.rand1][this.rand2] == 0) {
                     matrix[this.rand1][this.rand2] = 3;
                     this.person = new Predator.Predator(this.rand2, this.rand1, 3);
                     predatorArr.push(this.person);
@@ -58,7 +58,7 @@ class PersonGenerator extends LivingCreature.LivingCreature {
             for (let i = 0; i < this.s * this.s * percent / 100; i++) {
                 this.rand1 = this.getRndInteger(0, this.s);
                 this.rand2 = this.getRndInteger(0, this.s);
-                if( matrix[this.rand1][this.rand2] == 0 ){
+                if (matrix[this.rand1][this.rand2] == 0) {
                     matrix[this.rand1][this.rand2] = 4;
                     this.person = new PredatorEater.PredatorEater(this.rand2, this.rand1, 4);
                     predatorEaterArr.push(this.person);
@@ -78,7 +78,7 @@ class PersonGenerator extends LivingCreature.LivingCreature {
             for (let i = 0; i < this.s * this.s * percent / 100; i++) {
                 this.rand1 = this.getRndInteger(0, this.s);
                 this.rand2 = this.getRndInteger(0, this.s);
-                if( matrix[this.rand1][this.rand2] == 0 ){
+                if (matrix[this.rand1][this.rand2] == 0) {
                     matrix[this.rand1][this.rand2] = 2;
                     this.person = new Grass.Grass(this.rand2, this.rand1, 1);
                     grassArr.push(this.person);

@@ -64,40 +64,7 @@ class LivingCreature {
     random (list) {
         return list[Math.floor((Math.random()*list.length))];
     } 
-
-    // eat(enemy_index, enemyArr) {
-    //     var creature = random(this.chooseCell(enemy_index));
-    //     if (creature) {
-    //         var newX = creature[0];
-    //         var newY = creature[1];
-
-    //         matrix[this.y][this.x] = 0;
-    //         matrix[newY][newX] = this.index;
-
-    //     for (let i in enemyArr) {
-    //             if (enemyArr[i].x == newX && enemyArr[i].y == newY) {
-    //                 enemyArr.splice(i, 1);
-    //                 break;
-    //             }
-    //         }
-
-    //         this.x = newX;
-    //         this.y = newY;
-    //         this.energy += 2;
-    //     }
-    // }
-
-    // die() {
-    //     if (this.energy <= 0) {
-    //         matrix[this.y][this.x] = 0;
-    //         for (let i in this.arr) {
-    //                 if (this.arr[i].x == this.x && this.arr[i].y == this.y) {
-    //                     this.arr.splice(i, 1);
-    //                     break;
-    //                 }
-    //             }
-    //     }
-    // }
+    
 }
 
 module.exports.LivingCreature = LivingCreature;

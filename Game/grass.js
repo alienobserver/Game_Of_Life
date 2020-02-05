@@ -45,7 +45,6 @@ class Grass {
             this.multiply = 0;
         }
     }
-
 }
 
 module.exports.Grass = Grass;

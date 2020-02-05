@@ -47,3 +47,4 @@ class Predator extends LivingCreature.LivingCreature {
 
 module.exports.Predator = Predator;
 
+

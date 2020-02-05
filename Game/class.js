@@ -142,8 +142,6 @@ class GrassEater {
             }
         }
     }
-
-
 }
 
 class Predator {

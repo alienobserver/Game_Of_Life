@@ -64,7 +64,6 @@ class LivingCreature {
     random (list) {
         return list[Math.floor((Math.random()*list.length))];
     } 
-    
 }
 
 module.exports.LivingCreature = LivingCreature;

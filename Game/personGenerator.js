@@ -93,3 +93,4 @@ class PersonGenerator extends LivingCreature.LivingCreature {
 }
 
 module.exports.PersonGenerator = PersonGenerator;
+

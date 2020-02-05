@@ -32,10 +32,20 @@
            border: 1px solid black; 
         }
         h4 {
-            display: inline-block;
+           display: inline-block;
            position: relative;
            bottom: 744px;
            left: 755px;
+        }
+        table{
+            display: inline-block;
+            position: relative;
+            bottom: 350px;
+            left: 0px;
+            border-collapse: collapse;
+        }
+        td, tr{
+            border: 1px solid black;
         }
     </style>
 </head>
@@ -188,6 +198,72 @@
     <button onclick="get_stat(this)" class="button">Get Statics</button>
     <div style="background-image: linear-gradient(to right, lightblue, black);"></div> <br>
     <h4 id="statistics"></h4> <br> <br>
+	<table id="legend">
+		<tr>
+			<td class="legend-color">Գույն</td>
+			<td>Անվանում</td>
+			<td>Շարժվում է</td>
+			<td>Ուտում է</td>
+			<td>Բազմանում է</td>
+			<td>Մահանում է</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:gray"></td>
+			<td>Դատարկ վանդակներ</td>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:green"></td>
+			<td>Խոտ</td>
+			<td></td>
+			<td></td>
+			<td>Մոտակա 8 վանդակներում, 8 տակտը մեկ</td>
+			<td></td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:yellow"></td>
+			<td>Խոտակեր</td>
+			<td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
+			<td>Խոտերին, մոտակա 8 վանդակներում, ուտելիս էներգիան ավելանում է 2֊ով</td>
+			<td>Բազմանում է մոտակա 8 վանդակներում, երբ էներգիան 12֊ից ավել է</td>
+			<td>Մահանում է, երբ էներգիան փոքր է 0֊ից</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:red"></td>
+			<td>Գիշատիչ</td>
+			<td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
+			<td>Խոտակերներին, մոտակա 8 վանդակներում, ուտելիս էներգիան ավելանում է 2֊ով</td>
+			<td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 12֊ից ավել է</td>
+			<td>Մահանում է, երբ էներգիան փոքր է 0֊ից</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:blue"></td>
+			<td>Գիշատչակեր</td>
+			<td>Մոտակա 8 վանդակներում, էներգիան քչանում է 1֊ով</td>
+			<td>Գիշատիչներին և Խոտերին, ուտելիս էներգիան ավելանում է 2֊ով</td>
+			<td>Բազմանում է մոտակա տարածքներում, երբ էներգիան 25-ից ավել է</td>
+			<td>Մահանում է, երբ էներգիան փոքր է 0֊ից</td>
+		</tr>
+		<tr>
+			<td class="legend-color" style="background-color:black"></td>
+			<td>Բոմբ</td>
+			<td>Չի շարժվում</td>
+			<td>Բոլորին բացի կերպարներին կառավարողից մոտակա 49 վանդակներում ամեն 10 տակտը մեկ</td>
+			<td>Չի բազմանում</td>
+			<td>Չի մահանում</td>
+        </tr>
+		<tr>
+			<td class="legend-color" style="background-color:pink"></td>
+			<td>Կերպարներին կառավարող</td>
+			<td>Մոտակա 8 վանդակներում</td>
+			<td>չի ուտում, միայն կառավարում է մյուս կերպարների քանակը</td>
+			<td>Չի բազմանում</td>
+			<td>Չի մահանում</td>
+		</tr>
+	</table>
 </body>
 </html>
 

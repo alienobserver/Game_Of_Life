@@ -22,7 +22,7 @@ rand1 = Game.rand1;
 rand2 = Game.rand2;
 statistics = Game.statistics;
 let rawdata;
-let text;
+
 Game.setup();
 
 app.get('/', function (req, res) {

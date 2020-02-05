@@ -37,9 +37,14 @@ io.on('connection', function (socket) {
    });
 
    socket.on('send stat', function () {
-      rawdata = fs.readFileSync('statistics.json');
-      statistics = JSON.parse(rawdata);
-      io.sockets.emit('get stat', statistics);
+      try{
+         rawdata = fs.readFileSync('statistics.json');
+         statistics = JSON.parse(rawdata);
+         io.sockets.emit('get stat', statistics);
+      }
+      catch(error){
+         
+      }
    });
 
    socket.on('mode 1', function () {

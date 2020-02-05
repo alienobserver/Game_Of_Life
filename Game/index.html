@@ -31,6 +31,12 @@
            width: 18px;
            border: 1px solid black; 
         }
+        h4 {
+            display: inline-block;
+           position: relative;
+           bottom: 744px;
+           left: 755px;
+        }
     </style>
 </head>
 <body>
@@ -43,7 +49,61 @@
         var predatorCol = "red";
         var predatorEaterCol = "blue";
         var personsGenCol = "pink";
-        var bombCol = "black"
+        var bombCol = "black";
+        var weather = "autumn";
+        var text = "";
+
+        function get_stat(x) {
+            socket.emit('send stat');
+        }
+
+        function change_weather( x ) {
+            if (weather == "winter") {
+                weather = "spring";
+                grassCol = "#6be831";
+                grassEaterCol = "yellow";
+                predatorCol = "red";
+                predatorEaterCol = "lightblue";
+                personsGenCol = "pink";
+                bombCol = "black";    
+                mode2( x );
+                mode4( x );
+            }
+            else if (weather == "spring") {
+                weather = "summer";
+                grassCol = "green";
+                grassEaterCol = "yellow";
+                predatorCol = "red";
+                predatorEaterCol = "blue";
+                personsGenCol = "pink";
+                bombCol = "black";   
+                mode4( x );        
+                mode2( x );
+            }
+            else if (weather == "summer") {
+                weather = "autumn";
+                grassCol = "#b55507";
+                grassEaterCol = "#e1ed3b";
+                predatorCol = "red";
+                predatorEaterCol = "blue";
+                personsGenCol = "pink";
+                bombCol = "black";  
+                mode3( x );    
+                mode2( x );     
+            }
+            else if (weather == "autumn") {
+                weather = "winter";
+                grassCol = "white";
+                grassEaterCol = "yellow";
+                predatorCol = "#bd2424";
+                predatorEaterCol = "#26ded5";
+                personsGenCol = "pink";
+                bombCol = "black";   
+                mode1( x );     
+                mode4( x );    
+            }
+            console.log(weather);
+        }
 
         function mode1( x ) {
             socket.emit('mode 1');
@@ -68,6 +128,16 @@
         function mode6( x ) {
             socket.emit('mode 6');
         }
+
+        socket.on('get stat', function (stat) {
+            text = "";
+            for (let key in stat){
+                if(stat.hasOwnProperty(key)){
+                    text += `${key} : ${stat[key]} <br>`;
+                }
+            }
+            document.getElementById("statistics").innerHTML = text;
+        });
 
         socket.on('get canvas' , function (matrix) {
             var canvas = document.getElementById("myCanvas");
@@ -113,5 +183,10 @@
     <div style="background-color: black;"></div> <br> <br>
     <button onclick="mode6(this)" class="button">Add Bombs</button>
     <div style="background-color: black;"></div> <br> <br>
+    <button onclick="change_weather(this)" class="button">Change Weather</button>
+    <div style="background-image: linear-gradient(to right, green, yellow, red, blue);"></div> <br> <br>
+    <button onclick="get_stat(this)" class="button">Get Statics</button>
+    <div style="background-image: linear-gradient(to right, lightblue, black);"></div> <br>
+    <h4 id="statistics"></h4> <br> <br>
 </body>
 </html>

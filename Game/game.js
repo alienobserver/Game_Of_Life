@@ -4,8 +4,8 @@ const Predator = require("./predator.js");
 const PredatorEater = require("./predatorEater.js");
 const PersonGenerator = require("./personGenerator");
 const Bomb = require("./bomb");
+const fs = require('fs');
 
-let side = 15;
 let grassArr = [];
 let grassEaterArr = [];
 let predatorArr = [];
@@ -22,18 +22,38 @@ let s = n;
 let matrix = [];
 let rand1 = 0;
 let rand2 = 0;
+let statistics = {};
+
+function send_stat( filename ) {
+    if ( grassArr ){
+        statistics.grass = grassArr.length;
+     }
+     if ( grassEaterArr ){
+        statistics.grassEater = grassEaterArr.length;
+     }
+     if ( predatorArr ){
+        statistics.predator = predatorArr.length;
+     }
+     if ( predatorEaterArr ){
+        statistics.predatorEater = predatorEaterArr.length;
+     }
+     if ( bombArr ) {
+        statistics.bomb = bombArr.length;
+     }
+     statistics.personGenerator = 1; // personGenerator is not an array and we can't get its length and it has only 1 person.
+     fs.writeFile(filename, JSON.stringify(statistics), function(){
+     });
+}
 
 function mode_1() {
     preEatCount = 0;
+    predatorEaterArr.splice( 0 , predatorEaterArr.length  );
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 4) {
                 matrix[y][x] = 0
             }
         }
-    }
-    if (predatorEaterArr) {
-        predatorEaterArr = [];
     }
 }
 
@@ -51,17 +71,16 @@ function mode_2() {
         }
     }
 }
+
 function mode_3() {
     preCount = 0;
+    predatorArr.splice( 0 , predatorArr.length  );
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 3) {
                 matrix[y][x] = 0
             }
         }
-    }
-    if (predatorArr) {
-        predatorArr = [];
     }
 }
 function mode_4() {
@@ -79,15 +98,13 @@ function mode_4() {
     }
 }
 function mode_5() {
+    bombArr = [];
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 6) {
                 matrix[y][x] = 0
             }
         }
-    }
-    if (bombArr) {
-        bombArr = [];
     }
 }
 function mode_6() {
@@ -194,11 +211,13 @@ function draw() {
     perGen.add_grasseater(grEatCount);
     perGen.add_predatoreater(preEatCount);
     perGen.move();
-
 }
 
 module.exports.setup = setup;
 module.exports.draw = draw;
+module.exports.n = n;
+module.exports.rand1 = rand1;
+module.exports.rand2 = rand2;
 module.exports.getRndInteger = getRndInteger;
 module.exports.pull_array = pull_array;
 module.exports.grassArr = grassArr;
@@ -217,4 +236,5 @@ module.exports.mode_3 = mode_3;
 module.exports.mode_4 = mode_4;
 module.exports.mode_5 = mode_5;
 module.exports.mode_6 = mode_6;
-
+module.exports.send_stat = send_stat;
+module.exports.statistics = statistics;

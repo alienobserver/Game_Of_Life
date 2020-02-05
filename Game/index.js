@@ -2,6 +2,7 @@ const Game = require("./game");
 const app = require('express')();
 const http = require('http').createServer(app);
 const io = require('socket.io')(http);
+const fs = require('fs');
 
 grCount = Game.grCount;
 grEatCount = Game.grEatCount;
@@ -19,17 +20,27 @@ s = Game.n;
 matrix = Game.matrix;
 rand1 = Game.rand1;
 rand2 = Game.rand2;
+statistics = Game.statistics;
+let rawdata;
+let text;
 Game.setup();
 
-app.get('/', function(req, res){
+app.get('/', function (req, res) {
    res.sendFile(__dirname + '/index.html');
 });
 
-io.on('connection', function(socket){
+io.on('connection', function (socket) {
    console.log('a user connected');
 
-   socket.on('disconnect', function(){
-     console.log('user disconnected');
+   socket.on('disconnect', function () {
+      console.log('user disconnected');
+   });
+
+   socket.on('send stat', function () {
+      Game.send_stat("statistics.json");
+      rawdata = fs.readFileSync('statistics.json');
+      statistics = JSON.parse(rawdata);
+      io.sockets.emit('get stat', statistics);
    });
 
    socket.on('mode 1', function () {
@@ -59,10 +70,10 @@ io.on('connection', function(socket){
    setInterval(function () {
       Game.draw();
       io.sockets.emit('get canvas', matrix);
-   } , 80 );
+   }, 80);
 
 });
 
-http.listen(3000, function(){
+http.listen(3000, function () {
    console.log('listening on *:3000');
 });

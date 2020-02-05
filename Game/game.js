@@ -59,17 +59,6 @@ function mode_1() {
 
 function mode_2() {
     preEatCount = 2.5;
-    if (predatorEaterArr.length < s * s * preEatCount / 100) {
-        for (let i = 0; i < s * s * preEatCount / 100; i++) {
-            rand1 = getRndInteger(0, s);
-            rand2 = getRndInteger(0, s);
-            if (matrix[rand1][rand2] == 0) {
-                matrix[rand1][rand2] = 4;
-                person = new PredatorEater.PredatorEater(rand2, rand1, 4);
-                predatorEaterArr.push(person);
-            }
-        }
-    }
 }
 
 function mode_3() {
@@ -85,17 +74,6 @@ function mode_3() {
 }
 function mode_4() {
     preCount = 5;
-    if (predatorArr.length < s * s * preCount / 100) {
-        for (let i = 0; i < s * s * preCount / 100; i++) {
-            rand1 = getRndInteger(0, s);
-            rand2 = getRndInteger(0, s);
-            if (matrix[rand1][rand2] == 0) {
-                matrix[rand1][rand2] = 3;
-                person = new Predator.Predator(rand2, rand1, 3);
-                predatorArr.push(person);
-            }
-        }
-    }
 }
 function mode_5() {
     bombArr = [];

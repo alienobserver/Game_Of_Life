@@ -27,22 +27,22 @@ let statistics = {};
 function send_stat( filename ) {
     if ( grassArr ){
         statistics.grass = grassArr.length;
-     }
-     if ( grassEaterArr ){
+    }
+    if ( grassEaterArr ){
         statistics.grassEater = grassEaterArr.length;
-     }
-     if ( predatorArr ){
+    }
+    if ( predatorArr ){
         statistics.predator = predatorArr.length;
-     }
-     if ( predatorEaterArr ){
+    }
+    if ( predatorEaterArr ){
         statistics.predatorEater = predatorEaterArr.length;
-     }
-     if ( bombArr ) {
+    }
+    if ( bombArr ) {
         statistics.bomb = bombArr.length;
-     }
-     statistics.personGenerator = 1; // personGenerator is not an array and we can't get its length and it has only 1 person.
-     fs.writeFile(filename, JSON.stringify(statistics), function(){
-     });
+    }
+    statistics.personGenerator = 1; // personGenerator is not an array and we can't get its length and it has only 1 person.
+    fs.writeFile(filename, JSON.stringify(statistics), function(){
+    });
 }
 
 function mode_1() {

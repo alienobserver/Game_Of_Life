@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <canvas id="myCanvas" width="750" height="750" style="display: inline-block;"></canvas>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Document</title>
     <style>
         .button {
@@ -11,16 +12,17 @@
             position: relative;
             bottom: 750px;
             left: 755px;
-            border: 1px solid black;
+            border: 1px solid gray;
             background-color: white;
             min-width: 160px;
+            font-family: 'Roboto', sans-serif;
         }
         .button:focus{
-            background-color: black;
+            background-color: gray;
             color: white;
         }
         #myCanvas{
-            border: 1px solid black;
+            border: 1px solid gray;
         }
         div{
            display: inline-block;
@@ -29,23 +31,26 @@
            left: 755px;
            height: 18px;
            width: 18px;
-           border: 1px solid black; 
+           border: 1px solid gray; 
         }
         h4 {
            display: inline-block;
            position: relative;
            bottom: 744px;
            left: 755px;
+           color: rgb(85, 85, 85);
+           font-family: 'Roboto', sans-serif;
         }
         table{
             display: inline-block;
             position: relative;
-            bottom: 390px;
+            bottom: 380px;
             left: 0px;
             border-collapse: collapse;
+            font-family: 'Roboto', sans-serif;
         }
         td, tr{
-            border: 1px solid black;
+            border: 1px solid gray;
         }
     </style>
 </head>
@@ -186,9 +191,9 @@
     <button onclick="mode2(this)" class="button">Add PredatorEaters</button>
     <div style="background-image: linear-gradient(to right, lightblue, blue);"></div> <br> <br>
     <button onclick="mode3(this)" class="button">Remove Predators</button>
-    <div style="background-image: linear-gradient(to right, rgb(255, 109, 109), red);"></div> <br> <br>
+    <div style="background-image: linear-gradient(to right, rgb(248, 168, 168), red);"></div> <br> <br>
     <button onclick="mode4(this)" class="button">Add Predators</button>
-    <div style="background-image: linear-gradient(to right, rgb(255, 109, 109), red);"></div> <br> <br>
+    <div style="background-image: linear-gradient(to right, rgb(248, 168, 168), red);"></div> <br> <br>
     <button onclick="mode5(this)" class="button">Remove Bombs</button>
     <div style="background-image: linear-gradient(to right, gray, black);"></div> <br> <br>
     <button onclick="mode6(this)" class="button">Add Bombs</button>
@@ -251,7 +256,7 @@
 			<td class="legend-color" style="background-color:black"></td>
 			<td>Բոմբ</td>
 			<td>Չի շարժվում</td>
-			<td>Բոլորին բացի կերպարներին կառավարողից մոտակա 49 վանդակներում ամեն 10 տակտը մեկ</td>
+			<td>Բոլորին բացի կերպարներին կառավարողից մոտակա 48 վանդակներում ամեն 10 տակտը մեկ</td>
 			<td>Չի բազմանում</td>
 			<td>Չի մահանում</td>
         </tr>

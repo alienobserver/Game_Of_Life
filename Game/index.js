@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
       Game.draw();
       Game.send_stat("statistics.json");
       io.sockets.emit('get canvas', matrix);
-   }, 80);
+   }, 45);
 
 });
 

@@ -47,7 +47,7 @@ function send_stat( filename ) {
 
 function mode_1() {
     preEatCount = 0;
-    predatorEaterArr.splice( 0 , predatorEaterArr.length  );
+    predatorEaterArr.splice( 0 , predatorEaterArr.length);
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 4) {
@@ -63,7 +63,7 @@ function mode_2() {
 
 function mode_3() {
     preCount = 0;
-    predatorArr.splice( 0 , predatorArr.length  );
+    predatorArr.splice( 0 , predatorArr.length);
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 3) {
@@ -76,7 +76,7 @@ function mode_4() {
     preCount = 5;
 }
 function mode_5() {
-    bombArr = [];
+    bombArr.splice( 0 , bombArr.length);
     for (var y = 0; y < matrix.length; y++) {
         for (var x = 0; x < matrix[y].length; x++) {
             if (matrix[y][x] == 6) {

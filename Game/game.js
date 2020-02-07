@@ -14,7 +14,7 @@ let bombArr = [];
 let perGen;
 let preCount = 5;
 let preEatCount = 2.5;
-let grCount = 10;
+let grCount = 20;
 let grEatCount = 5;
 let n = 50;
 let m = n;

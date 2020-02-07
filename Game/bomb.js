@@ -7,57 +7,14 @@ class Bomb extends LivingCreature.LivingCreature {
     }
 
     getNewCoordinates() {
-        this.directions = [
-            [this.x - 1, this.y - 1],
-            [this.x, this.y - 1],
-            [this.x + 1, this.y - 1],
-            [this.x - 1, this.y],
-            [this.x + 1, this.y],
-            [this.x - 1, this.y + 1],
-            [this.x, this.y + 1],
-            [this.x + 1, this.y + 1],
-            [this.x - 2, this.y - 2],
-            [this.x - 1, this.y - 2],
-            [this.x, this.y - 2],
-            [this.x + 1, this.y - 2],
-            [this.x + 2, this.y - 2],
-            [this.x - 2, this.y - 1],
-            [this.x + 2, this.y - 1],
-            [this.x - 2, this.y],
-            [this.x + 2, this.y],
-            [this.x - 2, this.y + 1],
-            [this.x + 2, this.y + 1],
-            [this.x - 2, this.y + 2],
-            [this.x - 1, this.y + 2],
-            [this.x, this.y + 2],
-            [this.x + 1, this.y + 2],
-            [this.x + 2, this.y + 2],
-            [this.x - 3, this.y - 3],
-            [this.x - 2, this.y - 3],
-            [this.x - 1, this.y - 3],
-            [this.x, this.y - 3],
-            [this.x + 1, this.y - 3],
-            [this.x + 2, this.y - 3],
-            [this.x + 3, this.y - 3],
-            [this.x - 3, this.y - 2],
-            [this.x + 3, this.y - 2],
-            [this.x - 3, this.y - 1],
-            [this.x + 3, this.y - 1],
-            [this.x - 3, this.y],
-            [this.x + 3, this.y],
-            [this.x - 3, this.y + 1],
-            [this.x + 3, this.y + 1],
-            [this.x - 3, this.y + 2],
-            [this.x + 3, this.y + 2],
-            [this.x - 3, this.y + 3],
-            [this.x - 2, this.y + 3],
-            [this.x - 2, this.y + 3],
-            [this.x - 1, this.y + 3],
-            [this.x, this.y + 3],
-            [this.x + 1, this.y + 3],
-            [this.x + 2, this.y + 3],
-            [this.x + 3, this.y + 3]
-        ];
+        this.directions = [];
+        for (let x = -6; x <= 6; x++) {
+            for (let y = -6; y <= 6; y++) {
+                if( x != 0 || y != 0 ){
+                    this.directions.push([this.x - x, this.y - y]);
+                }
+            }            
+        }        
     }
 
     move() { }

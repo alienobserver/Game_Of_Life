@@ -38,6 +38,7 @@ io.on('connection', function (socket) {
 
    socket.on('send stat', function () {
       try{
+         Game.send_stat("statistics.json");
          rawdata = fs.readFileSync('statistics.json');
          statistics = JSON.parse(rawdata);
          io.sockets.emit('get stat', statistics);
@@ -73,9 +74,8 @@ io.on('connection', function (socket) {
 
    setInterval(function () {
       Game.draw();
-      Game.send_stat("statistics.json");
       io.sockets.emit('get canvas', matrix);
-   }, 55);
+   }, 70);
 
 });
 

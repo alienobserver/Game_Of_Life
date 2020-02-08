@@ -41,7 +41,7 @@ function send_stat( filename ) {
         statistics.bomb = bombArr.length;
     }
     statistics.personGenerator = 1; // personGenerator is not an array and we can't get its length and it has only 1 person.
-    fs.writeFile(filename, JSON.stringify(statistics), function(){
+    fs.writeFileSync(filename, JSON.stringify(statistics), function(){
     });
 }
 

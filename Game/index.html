@@ -3,19 +3,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <canvas id="myCanvas" width="750" height="750" style="display: inline-block;"></canvas>
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Document</title>
     <style>
         .button {
             display: inline-block;
             position: relative;
-            bottom: 750px;
-            left: 755px;
+            bottom: 755px;
+            left: 758px;
             border: 1px solid gray;
             background-color: white;
             min-width: 160px;
             font-family: 'Roboto', sans-serif;
+            border-radius: 13px;
         }
         .button:focus{
             background-color: gray;
@@ -23,22 +23,23 @@
         }
         #myCanvas{
             border: 1px solid gray;
+            border-radius: 5px;
         }
         div{
            display: inline-block;
            position: relative;
-           bottom: 744px;
-           left: 755px;
+           bottom: 750px;
+           left: 758px;
            height: 18px;
            width: 18px;
            border: 1px solid gray; 
+           border-radius: 15px;
         }
         h4 {
            display: inline-block;
            position: relative;
-           bottom: 744px;
-           left: 755px;
-           color: rgb(85, 85, 85);
+           bottom: 755px;
+           left: 758px;
            font-family: 'Roboto', sans-serif;
         }
         table{
@@ -53,9 +54,22 @@
             border: 1px solid gray;
             height: 70px;
         }
+        #canvas{
+           position: relative;
+           top: 2px;
+           left: 2px;
+           height: 751px;
+           width: 751px;
+           border: 1px solid gray; 
+           border-radius: 5px;
+           display: inline-block;
+        }
     </style>
 </head>
 <body>
+    <div id="canvas">
+        <canvas id="myCanvas" width="750" height="750" style="display: inline-block;"></canvas>
+    </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
         var socket = io();
@@ -69,9 +83,7 @@
         var weather = "spring";
         var text = "";
 
-        change_weather(  );
-
-        function get_stat(x) {
+        function get_stat( ) {
             socket.emit('send stat');
         }
 
@@ -186,7 +198,9 @@
                     ctx.fillRect(x * side, y * side, side, side);
                 }
             }
-        });    
+        });   
+        change_weather(  );
+        get_stat(  ); 
     </script>
     <br>
     <button onclick="mode1()" class="button">Remove PredatorEaters</button>

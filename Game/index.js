@@ -75,7 +75,7 @@ io.on('connection', function (socket) {
    setInterval(function () {
       Game.draw();
       io.sockets.emit('get canvas', matrix);
-   }, 70);
+   }, 55);
 
 });
 

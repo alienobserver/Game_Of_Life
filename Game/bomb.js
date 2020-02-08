@@ -8,8 +8,8 @@ class Bomb extends LivingCreature.LivingCreature {
 
     getNewCoordinates() {
         this.directions = [];
-        for (let x = -3; x <= 3; x++) {
-            for (let y = -3; y <= 3; y++) {
+        for (let x = -6; x <= 6; x++) {
+            for (let y = -6; y <= 6; y++) {
                 if( x != 0 || y != 0 ){
                     this.directions.push([this.x - x, this.y - y]);
                 }

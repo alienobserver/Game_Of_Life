@@ -4,17 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
     <title>Document</title>
     <style>
         .button {
             display: inline-block;
-            position: relative;
-            bottom: 755px;
-            left: 758px;
             border: 1px solid gray;
             background-color: white;
-            min-width: 160px;
-            font-family: 'Roboto', sans-serif;
+            width: 200px;
+            height: 20px;
+            font-family: 'Righteous', cursive;
             border-radius: 13px;
         }
         .button:focus{
@@ -25,29 +24,36 @@
             border: 1px solid gray;
             border-radius: 5px;
         }
-        div{
+        .button-circles{
            display: inline-block;
-           position: relative;
-           bottom: 749px;
-           left: 758px;
            height: 18px;
            width: 18px;
            border: 1px solid gray; 
            border-radius: 15px;
         }
+        .buttons{
+            display: flex;
+            flex-direction: column; 
+            width: 250px;
+        }
+        .BAC{
+            display: inline-block;
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+        .main{
+            display: flex;
+            align-items: center;
+        }
         h4 {
            display: inline-block;
-           position: relative;
-           bottom: 755px;
-           left: 758px;
-           font-family: 'Roboto', sans-serif;
+           font-family: 'Righteous', cursive;
            color: black;
         }
         table{
-            display: inline-block;
-            position: relative;
-            bottom: 380px;
-            left: 0px;
+            margin-top: 10px;
+            margin-left: 10px;
+            display: block;
             border-collapse: collapse;
             font-family: 'Roboto', sans-serif;
         }
@@ -56,20 +62,63 @@
             height: 70px;
         }
         #canvas{
-           position: relative;
-           top: 2px;
-           left: 2px;
-           height: 751px;
-           width: 751px;
-           border: 1px solid gray; 
-           border-radius: 5px;
-           display: inline-block;
+            margin-top: 10px;
+            margin-left: 10px;
+            border: 1px solid gray; 
+            border-radius: 5px;
+            display: inline-block;
+        }
+        .row{
+            display: flex;
+            justify-content: center;
         }
     </style>
 </head>
 <body>
-    <div id="canvas">
-        <canvas id="myCanvas" width="750" height="750" style="display: inline-block;"></canvas>
+    <div class="main" >
+        <div id="canvas">
+            <canvas id="myCanvas" width="750" height="750" style="display: inline-block;"></canvas>
+        </div>
+
+        <div class="BAC" >
+            <div class="buttons">
+                <div class="row">
+                    <button onclick="mode1()" class="button">Remove PredatorEaters</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, lightblue, blue);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="mode2()" class="button">Add PredatorEaters</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, lightblue, blue);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="mode3()" class="button">Remove Predators</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, rgb(248, 168, 168), red);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="mode4()" class="button">Add Predators</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, rgb(248, 168, 168), red);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="mode5()" class="button">Remove Bombs</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, rgb(199, 199, 199), black);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="mode6()" class="button">Add Bombs</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, rgb(199, 199, 199), black);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="change_weather()" class="button">Change Weather</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, green, yellow, red, blue);"></div> <br> <br>
+                </div>
+                <div class="row">
+                    <button onclick="get_stat()" class="button">Get Statics</button>
+                    <div class="button-circles" style="background-image: linear-gradient(to bottom right, lightblue, black);"></div> <br>
+                </div>
+                <div class="row">
+                    <h4 id="statistics"></h4>
+                </div>
+            </div>
+        </div>
     </div>
     <script src="/socket.io/socket.io.js"></script>
     <script>
@@ -203,24 +252,6 @@
         change_weather(  );
         get_stat( );
     </script>
-    <br>
-    <button onclick="mode1()" class="button">Remove PredatorEaters</button>
-    <div style="background-image: linear-gradient(to bottom right, lightblue, blue);"></div> <br> <br>
-    <button onclick="mode2()" class="button">Add PredatorEaters</button>
-    <div style="background-image: linear-gradient(to bottom right, lightblue, blue);"></div> <br> <br>
-    <button onclick="mode3()" class="button">Remove Predators</button>
-    <div style="background-image: linear-gradient(to bottom right, rgb(248, 168, 168), red);"></div> <br> <br>
-    <button onclick="mode4()" class="button">Add Predators</button>
-    <div style="background-image: linear-gradient(to bottom right, rgb(248, 168, 168), red);"></div> <br> <br>
-    <button onclick="mode5()" class="button">Remove Bombs</button>
-    <div style="background-image: linear-gradient(to bottom right, rgb(199, 199, 199), black);"></div> <br> <br>
-    <button onclick="mode6()" class="button">Add Bombs</button>
-    <div style="background-image: linear-gradient(to bottom right, rgb(199, 199, 199), black);"></div> <br> <br>
-    <button onclick="change_weather()" class="button">Change Weather</button>
-    <div style="background-image: linear-gradient(to bottom right, green, yellow, red, blue);"></div> <br> <br>
-    <button onclick="get_stat()" class="button">Get Statics</button>
-    <div style="background-image: linear-gradient(to bottom right, lightblue, black);"></div> <br>
-    <h4 id="statistics"></h4> <br> <br>
 	<table id="legend">
 		<tr>
 			<td class="legend-color">Գույն</td>

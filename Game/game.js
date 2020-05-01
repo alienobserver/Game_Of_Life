@@ -40,7 +40,7 @@ function send_stat( filename ) {
     if ( bombArr ) {
         statistics.bomb = bombArr.length;
     }
-    statistics.personGenerator = 1; // personGenerator is not an array and we can't get its length and it has only 1 person.
+    statistics.personGenerator = 1; // personGenerator is not an array and we can't get its length and it has only 1 person so its value is 1.
     fs.writeFileSync(filename, JSON.stringify(statistics), function(){
     });
 }

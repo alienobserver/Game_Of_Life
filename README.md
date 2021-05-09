@@ -3,6 +3,7 @@ This is an canvas game created with javascript and it has 6 characters **grasses
 
 Run this to install node packages
 ```sh
+cd Game_Of_Life
 npm i
 ```
 
